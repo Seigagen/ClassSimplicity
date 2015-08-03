@@ -7,13 +7,10 @@ import android.os.Build;
 /**
  * Created by saumiljobalia on 8/3/15.
  */
-public class RuntimePermission {
+public abstract class RuntimePermission {
 
-    public RuntimePermission(){
 
-    }
-
-    public boolean verifyPermissions(int[] getResults){
+    public static boolean verifyPermissions(int[] getResults){
         for (int result : getResults){
             if (result != PackageManager.PERMISSION_GRANTED){
                 return false;
@@ -22,7 +19,7 @@ public class RuntimePermission {
         return true;
     }
 
-    public boolean hasSelfPermission(Activity activity, String[] permissions){
+    public static boolean hasSelfPermission(Activity activity, String[] permissions){
         if (!isMNC()){
             return true;
         }
@@ -36,7 +33,7 @@ public class RuntimePermission {
         return true;
     }
 
-    public boolean hasSelfPermission(Activity activity, String permissions){
+    public static boolean hasSelfPermission(Activity activity, String permissions){
         if (!isMNC()){
             return true;
         }
@@ -44,7 +41,7 @@ public class RuntimePermission {
         return activity.checkSelfPermission(permissions) == PackageManager.PERMISSION_GRANTED;
     }
 
-    private boolean isMNC() {
+    private static boolean isMNC() {
         return "MNC".equals(Build.VERSION.CODENAME);
     }
 }
